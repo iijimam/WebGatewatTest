@@ -1,0 +1,32 @@
+version: '3.7'
+
+services:
+  iris:
+    #image: containers.intersystems.com/intersystems/irishealth-community:2023.1.1.380.0
+    build:
+      context: ./iris
+      dockerfile: Dockerfile
+    init: true
+    container_name: iris4h
+    hostname: iris4h
+    ports:
+       - "52776:52773"
+       - "51776:1972"
+    environment:
+      - TZ=JST-9
+    volumes:
+      - ./iris:/ISC
+    command: --key /ISC/iris.key
+
+  webgw:
+    image: containers.intersystems.com/intersystems/webgateway:2023.1.1.380.0
+    container_name: webgw1
+    init: true
+    ports:
+      - 8080:80
+      - 8443:443
+    environment:
+    - ISC_CSP_CONF_FILE=/webgateway-shared/CSP.conf
+    - ISC_CSP_INI_FILE=/webgateway-shared/CSP.ini
+    volumes:
+    - ./webgateway:/webgateway-shared
