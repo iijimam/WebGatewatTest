@@ -97,7 +97,7 @@ key はパスフレーズが聞かれないように変更したほうが良い�
 
 [3) HTTPS通信用に証明書ファイルを準備](#3-https通信用に証明書ファイルを準備) のファイル適用のため、[docker-compose.yml](/docker-compose.yml) と [CSP.conf](/webgateway/CSP.conf) に専用の記述を追加
 
-    ※docker-compose.ymlのvolumesの設定で、[webgateway](/webgateway/)以下に配置したキーやini、confファイルがコンテナ内の「webgateway-shared」に配置され、SSL化も[CSP.conf](/webgateway/CSP.conf)の通りに設定されます。
+※docker-compose.ymlのvolumesの設定で、[webgateway](/webgateway/)以下に配置したキーやini、confファイルがコンテナ内の「webgateway-shared」に配置され、SSL化も[CSP.conf](/webgateway/CSP.conf)の通りに設定されます。
 
 - [docker-compose.yml](/docker-compose.yml) のwebgwコンテナに2種の環境変数とvolumeの設定を行う
 
