@@ -44,6 +44,8 @@ WebGateway用コンテナ起動時、IRIS用の設定が必要になるので、
 
 追加内容は[CSP.conf](/webgateway/CSP.conf)の中身
 
+> ※参考にしたページ：[https://github.com/intersystems-community/webgateway-examples](https://github.com/intersystems-community/webgateway-examples)
+
 
 ## 2) WebゲートウェイからIRISへ接続するための設定追加
 
@@ -93,9 +95,12 @@ key はパスフレーズが聞かれないように変更したほうが良い�
 
 ## 4) ApacheのSSL化
 
-[3) HTTPS通信用に証明書ファイルを準備](#3-https通信用に証明書ファイルを準備) のファイルの適用のため、[docker-compose.yml](/docker-compose.yml) と [CSP.conf](/webgateway/CSP.conf) に以下記述がある
+[3) HTTPS通信用に証明書ファイルを準備](#3-https通信用に証明書ファイルを準備) のファイル適用のため、[docker-compose.yml](/docker-compose.yml) と [CSP.conf](/webgateway/CSP.conf) に専用の記述を追加
 
-- [docker-compose.yml](/docker-compose.yml) のwebgwコンテナの環境変数をvolumeの設定
+    ※docker-compose.ymlのvolumesの設定で、[webgateway](/webgateway/)以下に配置したキーやini、confファイルがコンテナ内の「webgateway-shared」に配置され、SSL化も[CSP.conf](/webgateway/CSP.conf)の通りに設定されます。
+
+- [docker-compose.yml](/docker-compose.yml) のwebgwコンテナに2種の環境変数とvolumeの設定を行う
+
     ```
     environment:
     - ISC_CSP_CONF_FILE=/webgateway-shared/CSP.conf
